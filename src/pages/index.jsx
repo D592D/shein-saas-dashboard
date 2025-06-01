@@ -5,13 +5,13 @@ export default function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch('shein-saas-backend-production.up.railway.app')
       .then(res => res.json())
       .then(setProducts);
   }, []);
 
   const handleApprove = async (id) => {
-    await fetch(`/api/products/${id}`, {
+    await fetch(`shein-saas-backend-production.up.railway.app`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: 'approved' }),
