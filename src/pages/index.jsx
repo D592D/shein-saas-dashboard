@@ -5,10 +5,14 @@ export default function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('shein-saas-backend-production.up.railway.app')
-      .then(res => res.json())
-      .then(setProducts);
-  }, []);
+  fetch('https://shein-saas-backend-production.up.railway.app/api/products')
+    .then(res => res.json())
+    .then(data => {
+      const cleaned = data.filter(p => p.id && p.name && p.imageUrl);
+      setProducts(cleaned);
+    });
+}, []);
+
 
   const handleApprove = async (id) => {
     await fetch(`shein-saas-backend-production.up.railway.app`, {
